@@ -1,0 +1,16 @@
+1. 修改屏幕亮度
+Ubuntu / Debian 系统有一个通病，那就是每次开机，系统都会把你的屏幕亮度调到最大值。 我很惊讶为什么到了14.04版本这个问题还是没有修复。 不过我们可以通过脚本让Ubuntu每次启动时都把亮度设置成一个固定的值。
+
+首先查看一下你的屏幕亮度值的范围：
+
+cd /sys/class/backlight/intel_backlight
+cat /sys/class/backlight/intel_backlight/brightness
+显示屏幕亮度值，当前合适值2643
+
+修改 /etc/rc.local ,在最后的 exit 0 之前添加：
+
+echo 2643 > /sys/class/backlight/intel_backlight/brightness
+
+系统完成启动最后会执行这个脚本，因此每次开机，都会把亮度值设置成2643。
+
+  
