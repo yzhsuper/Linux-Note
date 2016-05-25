@@ -1,12 +1,3 @@
-export JAVA_HOME=/opt/jdk1.8.0_65
-export TOMCAT_HOME=/opt/apache-tomcat-7.0.67
-export CATALINA_HOME=/opt/apache-tomcat-7.0.67
-export MAVEN_HOME=/opt/apache-maven-3.3.9
-export M2_HOME=/opt/apache-maven-3.3.9
-export ZOOKEEPER_HOME=/opt/zookeeper-3.4.7
-export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-export PATH=$PATH:$JAVA_HOME/bin:$MAVEN_HOME/bin:$CATALINA_HOME/bin
-
 Ubuntu Linux 环境变量PATH设置
 0人收藏此文章，收藏此文章 发表于2小时前 , 已有2次阅读 共0个评论0人收藏此文章
 Ubuntu Linux系统环境变量配置文件： 
