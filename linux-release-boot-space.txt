@@ -1,0 +1,64 @@
+很多同学都是在自己的机器上安装双系统，也就是说用来装linux的空间不会很多。在装的过程中都喜欢把boot挂单独挂分区，一般设置100M，
+可随着linux升级，往往会攒下好几个内核，某一天系统会提示你升级失败，空间不足了。。。
+更改boot分区大大小不晓得可不可以做到，貌似linux下还没有无损分区的概念。
+既然已经知道是boot空间不足了，那首先我们看看里面都有神马东西！！
+expired@expired:~$ ls /boot
+abi-2.6.35-25-generic memtest86+.bin
+abi-2.6.35-27-generic memtest86+_multiboot.bin
+abi-2.6.35-28-generic System.map-2.6.35-25-generic
+config-2.6.35-25-generic System.map-2.6.35-27-generic
+config-2.6.35-27-generic System.map-2.6.35-28-generic
+config-2.6.35-28-generic vmcoreinfo-2.6.35-25-generic
+grub vmcoreinfo-2.6.35-27-generic
+initrd.img-2.6.35-25-generic vmcoreinfo-2.6.35-28-generic
+initrd.img-2.6.35-27-generic vmlinuz-2.6.35-25-generic
+initrd.img-2.6.35-28-generic vmlinuz-2.6.35-27-generic
+lost+found vmlinuz-2.6.35-28-generic
+我们可以看到都是一些内核启动文件，很明显有些是我们不需要的，其实以上都还是我已经卸载了俩比较老的内核的情况了，没商量，不需要的就当垃圾处理掉。
+首先请用uname -a看下自己当前启动的是哪个内核。
+expired@expired:~$ uname -a
+Linux expired 2.6.35-28-generic #49-Ubuntu SMP Tue Mar 1 14:39:03 UTC 2011 x86_64 GNU/Linux
+从中可以看到我此刻启动的是2.6.35-28-generic，再用dpkg命令看下你的机器上都有哪些内核文件。
+expired@expired:~$ dpkg --get-selections |grep linux-image
+linux-image-2.6.35-22-generic deinstall
+linux-image-2.6.35-24-generic deinstall
+linux-image-2.6.35-25-generic install
+linux-image-2.6.35-27-generic install
+linux-image-2.6.35-28-generic install
+linux-image-generic install
+不少，理论上除正在用的都可以删除，但刚升级的东西可能不稳定，为保险起见，保留1-2个之前版本吧。
+运行apt-get remove命令卸载不需要的内核。
+expired@expired:~$ sudo apt-get remove linux-image-2.6.35-25-generic
+The following packages will be REMOVED:
+linux-image-2.6.35-25-generic
+0 upgraded, 0 newly installed, 1 to remove and 0 not upgraded.
+After this operation, 139MB disk space will be freed.
+Do you want to continue [Y/n]? y
+出现以上提示问是否继续，按y或者直接回车继续。完成后会有如下提示：
+DKMS: uninstall Completed.
+Examining /etc/kernel/postrm.d .
+run-parts: executing /etc/kernel/postrm.d/initramfs-tools 2.6.35-25-generic /boot/vmlinuz-2.6.35-25-generic
+run-parts: executing /etc/kernel/postrm.d/zz-update-grub 2.6.35-25-generic /boot/vmlinuz-2.6.35-25-generic
+Generating grub.cfg ...
+Found linux image: /boot/vmlinuz-2.6.35-28-generic
+Found initrd image: /boot/initrd.img-2.6.35-28-generic
+Found linux image: /boot/vmlinuz-2.6.35-27-generic
+Found initrd image: /boot/initrd.img-2.6.35-27-generic
+Found memtest86+ image: /memtest86+.bin
+Found Windows 7 (loader) on /dev/sda1
+Found Windows Vista (loader) on /dev/sda4
+done
+现在的ubuntu会自动重建启动菜单grub.cfg，所以就一步到位了。卸载完后可以用df命令看下boot分区的空间使用情况。
+expired@expired:~$ df
+Filesystem 1K-blocks Used Available Use% Mounted on
+/dev/sda9 19223252 9429624 8817144 52% /
+/dev/sda7 93207 53279 35116 61% /boot
+ok，已经腾出35m空间了，现在可以运行sudo apt-get upgrade升级了。
+再用dpkg看下还剩什么东西。
+expired@expired:~$ dpkg --get-selections | grep linux-image
+linux-image-2.6.35-25-generic deinstall
+linux-image-2.6.35-27-generic install
+linux-image-2.6.35-28-generic install
+linux-image-generic install
+linux-image-2.6.35-25-generic 显示deinstall，表示已经删除，也许你觉得留着这个也不好看，那就重启后再运行一次卸载命令就可以了：
+expired@expired:~$apt-get remove linux-image-2.6.35-25-generic

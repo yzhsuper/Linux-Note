@@ -5,4 +5,4 @@
 4.jobs 查看所有后台运行的程序，然后可以通过 fg %N 使得后台的程序在前台运行。使用bg %N 使得程序回到后台运行
 5.查看某一端口的占用情况： lsof -i:8080
 6.sudo -s 不用每次都输入sudo了
-
+7.lsb_release -a 查看Linux版本 或者cat /proc/version 或者uname -a
