@@ -10,3 +10,4 @@
 9.使用nautilus， 可以在命令行直接打开文件夹
 10 tar xvpf Redis-1.972.tar Redis-1.972/Changes 值解压某一个文件
 11 ulimit -a 查看文件与线程最大值 
+12 使用root用户，编辑/etc/sudoers ,添加youuser            ALL=(ALL)                NOPASSWD: ALL	可以为用户添加sudo权限
