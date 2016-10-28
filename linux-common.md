@@ -1,0 +1,13 @@
+1.查看所有任务(进程):ps aux
+2.查看某一具体任务:ps aux | grep 程序名
+3.修改ubuntu终端显示路径:export PS1='[\u@\h \W]\$ ',这个是临时的,重启后没有,可以添加到用户的.bashrc文件里或者系统的profile文件里,或者直接修改.bashrc 将/w改为大写的/W export PS1="\[\e[35;1m\]\u@\h:\W$ \[\e[0m\]"这个是有颜色的
+4.jobs 查看所有后台运行的程序，然后可以通过 fg %N 使得后台的程序在前台运行。使用bg %N 使得程序回到后台运行
+5.查看某一端口的占用情况： lsof -i:8080
+6.sudo -s 不用每次都输入sudo了
+7.lsb_release -a 查看Linux版本 或者cat /proc/version 或者uname -a
+8.查看所有安装的内核dpkg --get-selections |grep linux-image，配合7查看当前版本，然后通过sudo apt-get purge linux-image-3.5.0-17-generic删除多余
+9.使用nautilus， 可以在命令行直接打开文件夹
+10.ar xvpf Redis-1.972.tar Redis-1.972/Changes 只压某一个文件
+11.limit -a 查看文件与线程最大值 
+12.用root用户，编辑/etc/sudoers ,添加youuser            ALL=(ALL)                NOPASSWD: ALL	可以为用户添加sudo权限
+13.
