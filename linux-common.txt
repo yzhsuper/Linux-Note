@@ -10,4 +10,4 @@
 10.ar xvpf Redis-1.972.tar Redis-1.972/Changes 只压某一个文件
 11.limit -a 查看文件与线程最大值 
 12.用root用户，编辑/etc/sudoers ,添加youuser            ALL=(ALL)                NOPASSWD: ALL	可以为用户添加sudo权限
-13.
+13.sudo dpkg --clear-avail var/lib/dpkg/available' for reading: No such file or directory 解决
