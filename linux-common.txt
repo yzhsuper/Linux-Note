@@ -13,3 +13,4 @@
 13.sudo dpkg --clear-avail var/lib/dpkg/available' for reading: No such file or directory 解决
 14.# 设置鼠标灵敏度 xinput --set-prop "pointer:Rapoo gaming mouse" "Device Accel Constant Deceleration" 1.5
 14.xwininfo 查看窗口信息
+15.date -s 18:54:10 设置时间，clock --systohc同步时间
