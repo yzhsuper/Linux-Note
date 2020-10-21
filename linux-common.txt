@@ -14,4 +14,5 @@
 14.# 设置鼠标灵敏度 xinput --set-prop "pointer:Rapoo gaming mouse" "Device Accel Constant Deceleration" 1.5
 14.xwininfo 查看窗口信息
 15.date -s 18:54:10 设置时间，clock --systohc同步时间
-16. 屏幕分辨率，使用的命令：cvt 1918 x 888，xrandr
+16. 屏幕分辨率，使用的命令：cvt 1918 x 888，xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
+
